@@ -7,14 +7,17 @@ import java.util.Arrays;
 public class first {
 	
 	public static void main(String[] args) {
-		start:
-		while(true) {
+		Scanner rtf = new Scanner(System.in);
 		System.out.println("*******---Welcome to LockedMe.com ---*******\n");
 		System.out.println("Developer Name : Aayush Ranjan Singh \nCompany : TekSystems Global Services\n\n****************_____________________****************");
+		start:
+		while(true) {
+			
 		System.out.println("\nPlease choose the below options to perform your action\n");
 		System.out.println("1.Retrieve all the file name in ascending order\n2.Business level features\n3.Close the application\nEnter your choice:  ");
-		Scanner S =new Scanner(System.in);
-		int Choice=S.nextInt();
+		
+		int Choice=rtf.nextInt();
+		
 		switch(Choice) {
 		case 1:
 			File dir = new File("D:\\Temp");
@@ -32,42 +35,45 @@ public class first {
 		            }
 		         }
 		      }
-		    break start;
+		    break;
 	
 	   case 2:
-		   System.out.println("********Business level features*********\n");
+		   task:
+		   do {
+		   System.out.println("\n********Business level features*********\n");
 		   System.out.println("Please choose from the below option to perform your actions\n");
-		   System.out.println("a. Add a file\nb. Delete a file\nc. Search a file\nd. Return to main window\nEnter your choice:");
-		   Scanner sc = new Scanner(System.in);
-		   char c = sc.next().charAt(0); 
+		   System.out.println("1. Add a file\n2. Delete a file\n3. Search a file\n4. Return to main window\nEnter your choice:");
+		   int c = rtf.nextInt();
+		   
 		   switch(c) {
-		   case 'a':
-			   Scanner reader = new Scanner(System.in);
+		   case 1:
+			   
 			   boolean success = false;
 			   System.out.println("Enter file name to be created ");
-			   String filename = reader.nextLine();
+			   String filename = rtf.next();
 			   File f = new File("D:\\Temp",filename);
 			   if (f.exists()) {
 				   System.out.println("File already exists");}
 			   else {
 				   System.out.println("No such file exists, creating now");}
-			try {
-				success = f.createNewFile();
-			} catch (IOException e) {
+			   try {
+				  success = f.createNewFile();
+			       }    
+			   catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			      }
 				   if (success) {
 					   System.out.printf("Successfully created new file: %s%n", f);}
 				   else { System.out.printf("Failed to create new file: %s%n", f);}
-				   reader.close();
-				   break start;
+				   
+				   break;
 
 				 
-		   case 'b':
-			   Scanner reader1 = new Scanner(System.in);
+		   case 2:
+			   
 			   System.out.println("Enter file name to be deleted ");
-			   String file_to_delete = reader1.nextLine();
+			   String file_to_delete = rtf.nextLine();
 			   File z = new File("D:\\Temp",file_to_delete);
 			   if (z.exists()) {
 				   System.out.println("File successfully found");}
@@ -77,58 +83,59 @@ public class first {
 				   if (success) {
 					   System.out.printf("Successfully deleted file: %s%n", z);}
 				   else { System.out.printf("Failed to delete the file: %s%n", z);}
-				   reader1.close();
-				   break start;
 				   
-		   case 'c':
-			   Scanner scan = new Scanner(System.in);
+				   break;
+				   
+		   case 3:
+			  
 		       System.out.println("Enter the file to be searched.. " );
-		       String name = scan.next();
-		       File my_file_dir = new File("D://Temp");
-		       if (my_file_dir.exists()) {
-		    	   System.out.println("File or directory exists");
-		    	   }
-		       else {
-		    	   System.out.println("File does not exists");
-		    	      }
-		       break start;
+		       String name = rtf.next();
+		        File directory = new File("D:\\Temp"); 
+
+		       String[] flist = directory.list(); 
+		        int flag = 0; 
+		        if (flist == null) { 
+		            System.out.println("Empty directory."); 
+		        } 
+		        else { 
+		  
+		            // Linear search in the array 
+		            for (int i = 0; i < flist.length; i++) { 
+		                      String u = flist[i]; 
+		                if (u.equals(name)) { 
+		                    System.out.println(name + " found"); 
+		                    flag = 1; 
+		                } 
+		            } 
+		        } 
+		  
+		        if (flag == 0) { 
+		            System.out.println("File Not Found"); 
+		        } 
+		     
+		       break;
 		       
-		   case 'd':
-			   break start;
+		   case 4:
+			   break task;
 		    
 		   default:
 		       System.out.println("invalid input");
-			 
-			    
-		 }
+			   }
+		       }while(true);
+		       break;
 		       
 			   
 	    case 3:
 	    	System.out.println("Closing the application......");
 	    	System.out.println("Application closed");
-	    	System.exit(0);
-	    	break;
+	    	break start;
 		
 	    default:
 		     System.out.println("invalid input");
 			   }
 		   }
-		   }
+	rtf.close();	
+	}
 }		
 			
-			
-			
-			
-			
 		
-		
-		
-				
-		
-		
-		
-		
-		
-		
-	
-	
